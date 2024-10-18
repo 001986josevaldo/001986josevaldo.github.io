@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interface de Controle</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 90%;
+                height: 90vh;
+                border: 1px solid #ccc;
+                display: grid;
+                grid-template-columns: 200px 1fr 200px;
+                grid-template-rows: 50px 1fr 100px;
+                grid-gap: 10px;
+            }
+            .buttons {
+                grid-column: 3 / 4;
+                grid-row: 1 / 4;
+                border: 1px solid red;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            .buttons button {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+            .buttons label {
+                margin-bottom: 5px;
+                margin-left: 5px;
+                padding: 5px;
+                display: inline-block; /* Exibe labels lado a lado */
+                width: 40%; /* Define largura da label de texto */
+            }
+            .main-box { /* Label central*/
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+                border: 1px solid red;
+                width: 50%; /* largura*/
+                height: 75%; /* altura */
+                margin: 0 auto; /* Centraliza a label */
+            }
+            .bottom-controls {/*Botoes inferiores*/
+                grid-column: 1 / 2;/*coluna da esquerda */
+                grid-row: 3 / 4;
+                border: 1px solid rgb(245, 239, 239);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .bottom-controls div {
+                margin: 0 5px;
+            }
+            .bottom-controls label {
+                margin-left: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+    
+            <!-- Label e Button Panel -->
+            <div class="buttons">
+                <div>Total: <label id="total-inferencia">0</label></div> <!-- Label atualizada com o total -->
+
+                <label for="Papel">Papel: </label>
+                <label id="papel-inferencia">0</label> <!-- Label atualizada com inferências -->
+                <label for="Pedra">Pedra: </label>
+                <label id="pedra-inferencia">0</label> <!-- Label atualizada com inferências -->
+                <label for="Tesoura">Tesoura: </label>
+                <label id="tesoura-inferencia">0</label> <!-- Label atualizada com inferências -->
+
+                <button>Start Inference</button>
+                <button>Stop Inference</button>
+                <button>Toggle Camera</button>
+                <button>Save Results</button>
+            </div>
+    
+            <!-- Main Box -->
+            <div class="main-box"></div>
+    
+            <!-- Bottom Controls -->
+            <div class="bottom-controls">
+                <div>
+                    <input type="radio" id="horizontal" name="orientation" value="horizontal" checked>
+                    <label for="horizontal">Horizontal</label>
+                </div>
+                <div>
+                    <input type="radio" id="vertical" name="orientation" value="vertical">
+                    <label for="vertical">Vertical</label>
+                </div>
+                <div>
+                    <label for="tamanho">Tamanho:</label>
+                    <input type="range" id="tamanho" name="tamanho" min="1" max="100">
+                </div>
+                <div>
+                    <label for="eixoX">Eixo X:</label>
+                    <input type="range" id="eixoX" name="eixoX" min="1" max="100">
+                </div>
+                <div>
+                    <label for="eixoY">Eixo Y:</label>
+                    <input type="range" id="eixoY" name="eixoY" min="1" max="100">
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
