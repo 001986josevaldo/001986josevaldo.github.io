@@ -55,7 +55,7 @@
             .main-box { /* Label central*/
                 grid-column: 2 / 3;
                 grid-row: 2 / 3;
-                border: 1px solid red;
+                border: 1px solid rgb(33, 5, 133);
                 width: 50%; /* largura*/
                 height: 75%; /* altura */
                 margin: 0 auto; /* Centraliza a label */
@@ -77,18 +77,15 @@
         </style>
     </head>
     <body>
+        <script src="index.js"></script>
         <div class="container">
     
             <!-- Label e Button Panel -->
             <div class="buttons">
-                <div>Total: <label id="total-inferencia">0</label></div> <!-- Label atualizada com o total -->
-
-                <label for="Papel">Papel: </label>
-                <label id="papel-inferencia">0</label> <!-- Label atualizada com inferências -->
-                <label for="Pedra">Pedra: </label>
-                <label id="pedra-inferencia">0</label> <!-- Label atualizada com inferências -->
-                <label for="Tesoura">Tesoura: </label>
-                <label id="tesoura-inferencia">0</label> <!-- Label atualizada com inferências -->
+                <div>Total: <label id="total-inferencia">1</label></div> <!-- Label atualizada com o total -->
+                <div>Papel: <label id="papel-inferencia">0</label></div> <!-- Label atualizada com o total -->
+                <div>Pedra: <label id="pedra-inferencia">0</label></div> <!-- Label atualizada com o total -->
+                <div>Tesoura: <label id="tesoura-inferencia">0</label></div> <!-- Label atualizada com o total -->
 
                 <button>Start Inference</button>
                 <button>Stop Inference</button>
@@ -124,4 +121,4 @@
             </div>
         </div>
     </body>
-    </html>
+</html>
