@@ -3,36 +3,76 @@ console.log('Iniciando acesso à câmera...');
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Iniciando acesso à câmera...');
 
-    // Seleciona o elemento .main-box no HTML
     const mainBox = document.querySelector('.main-box'); 
 
-    // Verifica se o mainBox existe
     if (!mainBox) {
         console.error('Elemento .main-box não encontrado');
         return;
     }
 
-    // Cria o elemento de vídeo e define suas propriedades
     const videoElement = document.createElement('video');
-    videoElement.style.width = '100%'; // Ajusta a largura do vídeo
-    videoElement.style.height = 'auto'; // Ajusta a altura do vídeo
-    mainBox.appendChild(videoElement); // Anexa o vídeo à .main-box
+    videoElement.style.width = '100%';
+    videoElement.style.height = 'auto';
+    mainBox.appendChild(videoElement); 
 
-    // Verifica se o navegador suporta o getUserMedia
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        // Pede permissão ao usuário para acessar a câmera
         navigator.mediaDevices.getUserMedia({ video: true })
         .then(function(stream) {
-            // Define o stream da câmera como a fonte do elemento de vídeo
             videoElement.srcObject = stream;
-            videoElement.play(); // Inicia o vídeo automaticamente
+            videoElement.play();
             console.log('Câmera iniciada com sucesso.');
+            startProcessing();
         })
         .catch(function(error) {
-            // Exibe erro no console caso não consiga acessar a câmera
             console.error('Erro ao acessar a câmera: ', error);
         });
     } else {
         console.error('getUserMedia não é suportado no seu navegador.');
+    }
+
+    function startProcessing() {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        // Cria o elemento img para mostrar a imagem processada
+        const imgElement = document.createElement('img');
+        imgElement.style.width = '100%';
+        imgElement.style.height = 'auto';
+        mainBox.appendChild(imgElement);
+
+        setInterval(function() {
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(function(blob) {
+                const formData = new FormData();
+                formData.append('image', blob, 'frame.jpg');
+
+                fetch('http://localhost:5000/process_image', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição: ' + response.status);
+                    }
+                    return response.blob();  // Recebe a imagem como blob
+                })
+                .then(blob => {
+                    // Converte o blob para uma URL e atualiza o src do imgElement
+                    const imageUrl = URL.createObjectURL(blob);
+                    imgElement.src = imageUrl;
+
+                    // Libera a URL do objeto quando não for mais necessária
+                    imgElement.onload = () => {
+                        URL.revokeObjectURL(imageUrl);
+                    };
+                })
+                .catch(error => {
+                    console.error('Erro ao processar a resposta:', error);
+                });
+            }, 'image/jpeg');
+        }, 100);
     }
 });
