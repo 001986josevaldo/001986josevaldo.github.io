@@ -7,11 +7,15 @@ Requisitos
 Frontend
 
 HTML5/CSS3: Para a estrutura e estilização da página.
+
 JavaScript: Para capturar frames da câmera, enviar imagens ao servidor e exibir o resultado processado.
+
 Navegador com suporte a getUserMedia: Necessário para acessar a câmera.
 
 Backend
 
 Python (ou outra linguagem de servidor)
+
 Flask (ou outro framework web)
+
 Biblioteca para processamento de imagem (ex: OpenCV, PIL)
