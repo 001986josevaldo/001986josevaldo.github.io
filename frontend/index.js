@@ -1,4 +1,3 @@
-console.log('Iniciando acesso à câmera...');
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Iniciando acesso à câmera...');
@@ -14,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     videoElement.style.width = '100%';
     videoElement.style.height = 'auto';
     mainBox.appendChild(videoElement); 
+// ---------------------------------------------------
+    const imgElement = document.createElement('img');
+    imgElement.style.width = '100%';
+    imgElement.style.height = 'auto';
+    // Inicialmente, ocultamos o elemento img, já que vamos mostrar o vídeo primeiro
+    imgElement.style.display = 'none'; 
+    mainBox.appendChild(imgElement); 
+// -----------------------------------------
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -33,12 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function startProcessing() {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-
-        // Cria o elemento img para mostrar a imagem processada
-        const imgElement = document.createElement('img');
-        imgElement.style.width = '100%';
-        imgElement.style.height = 'auto';
-        mainBox.appendChild(imgElement);
 
         setInterval(function() {
             canvas.width = videoElement.videoWidth;
@@ -68,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     imgElement.onload = () => {
                         URL.revokeObjectURL(imageUrl);
                     };
+                     // Quando a imagem processada é recebida, ocultamos o vídeo e mostramos a imagem
+                    videoElement.style.display = 'none';
+                    imgElement.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Erro ao processar a resposta:', error);
