@@ -3,3 +3,5 @@
 
 # Ignorar a pasta venvSite (ambiente virtual)
 /venvSite/
+
+__pycache__
