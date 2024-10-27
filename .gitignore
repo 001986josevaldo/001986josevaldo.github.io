@@ -5,3 +5,4 @@
 /venvSite/
 # Ignorar a pasta __pycache__
 **/__pycache__/
+**/dist/

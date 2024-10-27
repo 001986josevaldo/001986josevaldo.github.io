@@ -4,6 +4,9 @@ import cv2
 from io import BytesIO
 import numpy as np
 from inference import InferenceClass  # Classe que contém run_inference
+import subprocess
+import os
+
 
 app = Flask(__name__)
 CORS(app) # Habilita CORS para todas as rotas
@@ -31,7 +34,7 @@ def process_image():
         "pedra": model.pedra_label.text(),
         "tesoura": model.tesoura_label.text()
     }
-'''
+    '''
     # Retorna a imagem processada e os resultados
     return send_file(img_bytes, mimetype='image/jpeg')
 
