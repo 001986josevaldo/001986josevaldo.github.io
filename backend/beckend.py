@@ -16,6 +16,7 @@ classNames = ['papel', 'pedra', 'tesoura']
 inference_system = InferenceClass(model, classNames)
 
 @app.route('/process_image', methods=['POST'])
+
 def process_image():
     file = request.files['image'].read()  # Recebe a imagem do frontend
     npimg = np.frombuffer(file, np.uint8)

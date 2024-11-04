@@ -19,6 +19,7 @@ class InferenceClass:
         #self.linha = [100, 200, 500, 200]  # Exemplo de linha, ajustar conforme necessidade
 
     def run_inference(self, img):
+        img = cv2.flip(img, 1)
         results = self.model(img, stream=True)
         detections = np.empty((0, 5))
 

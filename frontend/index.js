@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const videoElement = document.createElement('video');
     videoElement.style.width = '100%';
     videoElement.style.height = 'auto';
+    videoElement.style.transform = 'scaleX(-1)'; // Inverte o vídeo na horizontal
     mainBox.appendChild(videoElement); 
 
     // Criação do elemento de imagem para exibir os frames processados
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicia o stream ao carregar a página
     startCameraStream();
-
+    
     // Controle do estado de processamento
     let isProcessing = false;
     let processingInterval;
@@ -121,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Processamento interrompido e câmera retomada.');  
         }
     }
+    startProcessing();
+    stopProcessing();
     // Eventos dos botões Start e Stop
     document.getElementById("start-btn").addEventListener("click", startProcessing);
     document.getElementById("stop-btn").addEventListener("click", stopProcessing);
